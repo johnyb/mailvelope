@@ -17,7 +17,7 @@
 
 requirejs.config({
   paths: {
-    jquery: 'common/dep/jquery.min',
+    jquery: 'common/dep/jquery',
     openpgp: 'dep/openpgp',
     mvelo: 'common/ui/inline/mvelo',
     parser_rules: 'common/dep/wysihtml5/js/advanced_parser_rules',
@@ -58,13 +58,13 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
   var injectOpen = true;
   // optimized cs injection variant, bootstrap code injected that loads cs
   var injectOptimized = true;
-  // keep reloaded iframes 
+  // keep reloaded iframes
   var frameHosts = [];
   // content script coding as string
   var csCode = '';
   // framestyles as string
   var framestyles = '';
-  
+
   function init() {
     controller.extend({initScriptInjection: initScriptInjection});
     migrate();
@@ -73,7 +73,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
     initScriptInjection();
     initMessageListener();
   }
-  
+
   function initConnectionManager() {
     // store incoming connections by name and id
     chrome.extension.onConnect.addListener(function(port) {
@@ -82,7 +82,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
       port.onMessage.addListener(controller.handlePortMessage);
       // update active ports on disconnect
       port.onDisconnect.addListener(controller.removePort);
-    }); 
+    });
   }
 
   function initMessageListener() {
@@ -98,7 +98,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
         }
       }
     );
-  } 
+  }
 
   function initContextMenu() {
     chrome.contextMenus.create({
@@ -116,7 +116,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
   }
 
   function initScriptInjection() {
-    
+
     if (injectOptimized && csCode === '') {
       // load content script
       $.get(chrome.extension.getURL('common/ui/inline/cs-mailvelope.js'), function(data) {
@@ -130,7 +130,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
         framestyles = data;
         var token = /\.\.\/\.\./g;
         framestyles = framestyles.replace(token, chrome.extension.getURL('common'));
-      }); 
+      });
     }
 
     var filterURL = controller.getWatchListFilterURLs();
@@ -138,7 +138,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
     filterURL = filterURL.map(function(host) {
       return '*://' + host + '/*';
     });
-    
+
     var filterType = ["main_frame", "sub_frame"];
 
     var requestFilter = {
@@ -200,7 +200,7 @@ define(["common/lib/controller", "common/lib/pgpViewModel", "openpgp", "jquery"]
   function migrate() {
     // migration
   }
-  
+
   init();
 
 });

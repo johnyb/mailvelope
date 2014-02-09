@@ -155,7 +155,7 @@ define(function (require, exports, module) {
           dFramePorts[id].postMessage({event: 'remove-dialog'});
         } else {
           // get armored message from dFrame
-          dFramePorts[id].postMessage({event: 'armored-message'});  
+          dFramePorts[id].postMessage({event: 'armored-message'});
         }
         break;
       case 'decrypt-popup-init':
@@ -173,7 +173,7 @@ define(function (require, exports, module) {
         // decrypt popup potentially needs pwd dialog
         if (pwdPort || mvelo.windows.modalActive) {
           // password dialog or modal dialog already open
-          dFramePorts[id].postMessage({event: 'remove-dialog'});        
+          dFramePorts[id].postMessage({event: 'remove-dialog'});
         } else {
           mvelo.windows.openPopup('common/ui/modal/decryptPopup.html?id=' + id, {width: 742, height: 450, modal: true}, function(window) {
             decryptPopup = window;
@@ -261,7 +261,7 @@ define(function (require, exports, module) {
         // send content
         mvelo.data.load('common/ui/inline/dialogs/templates/encrypt.html', function(content) {
           //console.log('content rendered', content);
-          eDialogPorts[id].postMessage({event: 'encrypt-dialog-content', data: content}); 
+          eDialogPorts[id].postMessage({event: 'encrypt-dialog-content', data: content});
           // get potential recipients from eFrame
           // if editor is active get recipients from parent eFrame
           eFramePorts[editor && editor.parent || id].postMessage({event: 'recipient-proposal'});
@@ -336,7 +336,7 @@ define(function (require, exports, module) {
           // editor transfers message to recipient encrypt frame
           eFramePorts[msg.recipient].postMessage({event: 'set-editor-output', text: output});
           editor.window.close();
-          editor = null;  
+          editor = null;
         }
         // sanitize if content from plain text, rich text already sanitized by editor
         if (prefs.data.general.editor_type == mvelo.PLAIN_TEXT) {
@@ -358,7 +358,7 @@ define(function (require, exports, module) {
           editor.parent = id;
           mvelo.windows.openPopup('common/ui/modal/editor.html?parent=' + id + '&editor_type=' + prefs.data.general.editor_type, {width: 742, height: 450, modal: false}, function(window) {
             editor.window = window;
-          }); 
+          });
         }
         break;
       case 'editor-init':
@@ -520,7 +520,7 @@ define(function (require, exports, module) {
         scannedHosts.length = 0;
         var options = {};
         options.contentScriptFile = [];
-        options.contentScriptFile.push("common/dep/jquery.min.js");
+        options.contentScriptFile.push("common/dep/jquery.js");
         options.contentScriptFile.push("common/ui/inline/mvelo.js");
         options.contentScript = scanScript;
         options.onMessage = handleMessageEvent;
@@ -605,7 +605,7 @@ define(function (require, exports, module) {
       if (labels.length < 2) return;
       if (labels.length <= 3) {
         if (/www.*/.test(labels[0])) {
-          labels[0] = '*';  
+          labels[0] = '*';
         } else {
           labels.unshift('*');
         }
@@ -621,8 +621,8 @@ define(function (require, exports, module) {
     var result = [];
     var prev = -1;
     unordered.sort(compFn).forEach(function(item) {
-      var equal = (compFn !== undefined && prev !== undefined) 
-      ? compFn(prev, item) === 0 : prev === item; 
+      var equal = (compFn !== undefined && prev !== undefined)
+      ? compFn(prev, item) === 0 : prev === item;
       if (!equal) {
         result.push(item);
         prev = item;

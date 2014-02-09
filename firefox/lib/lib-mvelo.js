@@ -128,7 +128,7 @@ mvelo.tabs.loadOptionsTab = function(hash, onMessage, callback) {
     } else {
       // if existent, set as active tab
       mvelo.tabs.activate(tabs[0], callback.bind(this, true));
-    }  
+    }
   });
 }
 
@@ -202,7 +202,7 @@ mvelo.util = {};
 var wysihtml5 = require("sdk/page-worker").Page({
   contentURL: data.url('dep/wysihtml5/empty.html'),
   contentScriptFile: [
-    data.url('common/dep/jquery.min.js'),
+    data.url('common/dep/jquery.js'),
     data.url('common/dep/wysihtml5/js/wysihtml5-0.4.0pre.js'),
     data.url('common/dep/wysihtml5/js/advanced_parser_rules.js'),
     data.url('dep/wysihtml5/init.js')
@@ -223,7 +223,7 @@ mvelo.util.setTimeout = timer.setTimeout;
 mvelo.util.clearTimeout = timer.clearTimeout;
 
 mvelo.util.getHostname = function(source) {
-  return url.URL(source).host.split(':')[0]; 
+  return url.URL(source).host.split(':')[0];
 }
 
 mvelo.util.getHost = function(source) {

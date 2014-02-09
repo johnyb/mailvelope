@@ -21,7 +21,7 @@ module.exports = function (grunt) {
         },
         files: [{
           src: [
-            'bower_components/jquery/jquery.min.js',
+            'bower_components/jquery/jquery.js',
             'common/ui/inline/mvelo.js',
             'common/ui/inline/main-cs.js',
             'common/ui/inline/extractFrame.js',
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: 'bower_components/jquery/',
-            src: 'jquery.min.js',
+            src: 'jquery.js',
             dest: 'build/common/dep/'
           },
           {
